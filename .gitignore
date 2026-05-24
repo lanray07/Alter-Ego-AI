@@ -1,0 +1,23 @@
+# Xcode
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# macOS
+.DS_Store
+
+# User secrets and local config
+*.xcconfig.local
+.env
+.env.*
+
+# StoreKit local testing artifacts
+*.storekit.local
