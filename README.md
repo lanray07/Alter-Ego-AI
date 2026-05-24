@@ -22,6 +22,7 @@ Project defaults:
 - Native ShareLink share sheet
 - WidgetKit placeholder code
 - Apple Watch placeholder view
+- Designed-for-iPhone/iPad Mac and Apple Vision compatible destinations enabled in Xcode settings
 
 ## StoreKit product identifiers
 
@@ -46,3 +47,7 @@ Never store API keys in the app. Put provider keys on your backend and disclose 
 The app is intentionally framed as general wellness, habits, motivation, and lifestyle software. It should not be marketed as medical, mental health, therapy, diagnosis, crisis counseling, financial, legal, or treatment software.
 
 See `AlterEgoAI/Resources/AppPrivacyDetails.md` for App Privacy preparation notes.
+
+## Platform launch plan
+
+Start with the iOS App Store record for iPhone and iPad. Keep iPhone/iPad availability enabled for Apple silicon Macs and Apple Vision Pro to maximize compatible-app reach without separate native macOS or visionOS binaries. Add native macOS or visionOS platform versions later when separate platform targets, screenshots, QA, and metadata are ready.
