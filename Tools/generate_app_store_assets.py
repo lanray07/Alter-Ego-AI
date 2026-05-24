@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ASSET_ROOT = ROOT / "AppStoreAssets"
 SCREENSHOT_ROOT = ASSET_ROOT / "Screenshots"
 ICON_EXPORT_ROOT = ASSET_ROOT / "AppIcon"
+SUBSCRIPTION_REVIEW_ROOT = ASSET_ROOT / "SubscriptionReview"
 XCASSETS_ROOT = ROOT / "AlterEgoAI" / "Resources" / "Assets.xcassets"
 APPICONSET_ROOT = XCASSETS_ROOT / "AppIcon.appiconset"
 ACCENT_ROOT = XCASSETS_ROOT / "AccentColor.colorset"
@@ -277,6 +278,169 @@ def draw_share(base: Image.Image, x: int, y: int, w: int) -> None:
     text(d, (x + 28, y + 578), "Native share sheet. Private until you share.", 24, WHITE, "bold")
 
 
+def draw_check(draw: ImageDraw.ImageDraw, x: int, y: int, color: tuple[int, int, int] = GREEN) -> None:
+    draw.line((x, y + 12, x + 9, y + 22, x + 27, y), fill=color, width=5, joint="curve")
+
+
+def draw_paywall_card(
+    base: Image.Image,
+    xy: tuple[int, int],
+    size: tuple[int, int],
+    title: str,
+    price: str,
+    subtitle: str,
+    features: Sequence[str],
+    selected: bool,
+) -> None:
+    x, y = xy
+    w, h = size
+    fill = (17, 21, 50, 248) if selected else (255, 255, 255, 18)
+    outline = (38, 238, 255, 170) if selected else (255, 255, 255, 42)
+    glow = (38, 238, 255, 70) if selected else None
+    rounded_rect(base, (x, y, x + w, y + h), 30, fill, outline, 2, glow)
+    d = ImageDraw.Draw(base)
+    text(d, (x + 28, y + 24), title, 30, WHITE, "bold")
+    text(d, (x + 28, y + 68), price, 24, CYAN if selected else MUTED, "bold")
+    text(d, (x + 28, y + 104), subtitle, 18, MUTED, "regular")
+    badge_fill = (38, 238, 255, 52) if selected else (255, 255, 255, 18)
+    badge_outline = (38, 238, 255, 130) if selected else (255, 255, 255, 45)
+    rounded_rect(base, (x + w - 122, y + 27, x + w - 28, y + 67), 20, badge_fill, badge_outline)
+    text(d, (x + w - 75, y + 37), "SELECTED" if selected else "PLAN", 13, CYAN if selected else MUTED, "bold", anchor="ma")
+    feature_y = y + 156
+    for feature in features[:4]:
+        draw_check(d, x + 30, feature_y + 3, GREEN if selected else CYAN)
+        wrapped_text(d, (x + 70, feature_y), feature, 19, w - 108, WHITE, "regular", 5)
+        feature_y += 47
+
+
+def draw_subscription_review_screenshot(
+    path: Path,
+    plan_title: str,
+    price: str,
+    subtitle: str,
+    features: Sequence[str],
+    product_id: str,
+    product_label: str,
+) -> None:
+    size = (1242, 2688)
+    w, h = size
+    base = gradient(size, [(0, (3, 4, 16)), (0.44, (17, 16, 56)), (1, (2, 20, 35))]).convert("RGBA")
+    add_radial_glow(base, (int(w * 0.82), int(h * 0.16)), int(w * 0.55), CYAN, 120)
+    add_radial_glow(base, (int(w * 0.13), int(h * 0.78)), int(w * 0.58), PURPLE, 135)
+    d = ImageDraw.Draw(base)
+
+    text(d, (92, 120), "ALTER EGO AI", 44, CYAN, "bold")
+    wrapped_text(d, (92, 188), "Unlock your future self.", 86, 960, WHITE, "bold", 10)
+    wrapped_text(d, (92, 405), "Premium identity coaching, custom missions, advanced insights, and cinematic progress tools for general wellness and habit-building.", 35, 980, (219, 228, 250), "regular", 12)
+
+    rounded_rect(base, (92, 620, 1150, 1210), 44, (11, 14, 36, 248), (38, 238, 255, 125), 2, (38, 238, 255, 40))
+    text(d, (134, 665), "Future Self Paywall", 36, WHITE, "bold")
+    text(d, (134, 718), "Shown before purchase. Digital premium features only.", 24, MUTED, "regular")
+    draw_orbit_icon(base, (1015, 765), 82, CYAN, 7)
+
+    draw_paywall_card(
+        base,
+        (134, 830),
+        (468, 345),
+        "Free",
+        "GBP 0",
+        "Start the identity loop.",
+        ["3 daily missions", "Basic habit tracking", "Limited AI messages", "7-day timeline"],
+        False,
+    )
+    draw_paywall_card(
+        base,
+        (640, 830),
+        (468, 345),
+        plan_title,
+        price,
+        subtitle,
+        features,
+        True,
+    )
+
+    rounded_rect(base, (92, 1228, 1150, 1858), 44, (17, 18, 45, 246), (255, 255, 255, 35), 2)
+    text(d, (134, 1278), "Included with this subscription", 38, WHITE, "bold")
+    feature_y = 1362
+    for feature in features:
+        rounded_rect(base, (134, feature_y - 10, 1108, feature_y + 70), 26, (255, 255, 255, 16), (255, 255, 255, 25))
+        draw_check(d, 166, feature_y + 15, GREEN)
+        wrapped_text(d, (214, feature_y + 6), feature, 28, 850, WHITE, "regular", 6)
+        feature_y += 96
+
+    rounded_rect(base, (92, 1928, 1150, 2168), 44, (28, 112, 255, 92), (38, 238, 255, 110), 2)
+    text(d, (134, 1978), product_label, 34, WHITE, "bold")
+    text(d, (134, 2032), product_id, 24, CYAN, "bold")
+    wrapped_text(d, (134, 2080), "AI coaching is informational and motivational only. This app is not medical, mental health, therapy, diagnosis, legal, financial, or crisis support software.", 26, 950, (226, 235, 255), "regular", 8)
+
+    rounded_rect(base, (180, 2260, 1062, 2360), 50, (38, 238, 255, 235), None, 1, (38, 238, 255, 70))
+    text(d, (621, 2290), "Continue", 34, (3, 7, 18), "bold", anchor="ma")
+    text(d, (621, 2422), "Manage or cancel anytime in Apple subscriptions.", 25, MUTED, "regular", anchor="ma")
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    base.convert("RGB").save(path, "PNG", optimize=True)
+
+
+def generate_subscription_review_screenshots() -> None:
+    products = [
+        (
+            "pro_monthly_review.png",
+            "Pro Monthly",
+            "GBP 9.99 / month",
+            "Unlimited momentum.",
+            [
+                "Unlimited AI future-self messages",
+                "Custom mission generation",
+                "Advanced insights and XP trends",
+                "Transformation timeline and widgets",
+                "Premium share cards",
+            ],
+            "com.alteregoai.pro.monthly",
+            "Alter Ego AI Pro Monthly",
+        ),
+        (
+            "pro_yearly_review.png",
+            "Pro Yearly",
+            "GBP 79.99 / year",
+            "A year of identity-based discipline.",
+            [
+                "Unlimited AI future-self messages",
+                "Custom mission generation",
+                "Advanced insights and weekly reviews",
+                "Full transformation timeline",
+                "Best value Pro access",
+            ],
+            "com.alteregoai.pro.yearly",
+            "Alter Ego AI Pro Yearly",
+        ),
+        (
+            "elite_monthly_review.png",
+            "Elite Monthly",
+            "GBP 19.99 / month",
+            "The cinematic identity upgrade.",
+            [
+                "Advanced AI personalities",
+                "Cinematic identity cards",
+                "Deep weekly reviews",
+                "Future-self voice placeholder",
+                "Apple Watch placeholder and premium themes",
+            ],
+            "com.alteregoai.elite.monthly",
+            "Alter Ego AI Elite Monthly",
+        ),
+    ]
+    for filename, plan_title, price, subtitle, features, product_id, product_label in products:
+        draw_subscription_review_screenshot(
+            SUBSCRIPTION_REVIEW_ROOT / filename,
+            plan_title,
+            price,
+            subtitle,
+            features,
+            product_id,
+            product_label,
+        )
+
+
 def draw_screenshot(path: Path, size: tuple[int, int], headline: str, subhead: str, phone_title: str, screen_kind: str) -> None:
     w, h = size
     base = gradient(size, [(0, (3, 4, 16)), (0.42, (20, 17, 55)), (1, (2, 17, 34))]).convert("RGBA")
@@ -390,6 +554,7 @@ def generate_app_icons() -> None:
 def main() -> None:
     generate_screenshots()
     generate_app_icons()
+    generate_subscription_review_screenshots()
     print(f"Generated assets under {ASSET_ROOT}")
     print(f"Generated Xcode asset catalog under {XCASSETS_ROOT}")
 
