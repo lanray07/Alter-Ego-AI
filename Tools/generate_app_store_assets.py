@@ -13,6 +13,7 @@ ASSET_ROOT = ROOT / "AppStoreAssets"
 SCREENSHOT_ROOT = ASSET_ROOT / "Screenshots"
 ICON_EXPORT_ROOT = ASSET_ROOT / "AppIcon"
 SUBSCRIPTION_REVIEW_ROOT = ASSET_ROOT / "SubscriptionReview"
+SUBSCRIPTION_IMAGE_ROOT = ASSET_ROOT / "SubscriptionImages"
 XCASSETS_ROOT = ROOT / "AlterEgoAI" / "Resources" / "Assets.xcassets"
 APPICONSET_ROOT = XCASSETS_ROOT / "AppIcon.appiconset"
 ACCENT_ROOT = XCASSETS_ROOT / "AccentColor.colorset"
@@ -441,6 +442,85 @@ def generate_subscription_review_screenshots() -> None:
         )
 
 
+def draw_subscription_promo_image(
+    path: Path,
+    tier: str,
+    title: str,
+    subtitle: str,
+    price: str,
+    product_id: str,
+    accent: tuple[int, int, int],
+) -> None:
+    size = 1024
+    image = gradient(
+        (size, size),
+        [(0, (4, 6, 20)), (0.48, (20, 17, 58)), (1, (3, 20, 35))],
+    ).convert("RGBA")
+    add_radial_glow(image, (780, 170), 560, accent, 145)
+    add_radial_glow(image, (175, 850), 520, PURPLE, 135)
+    d = ImageDraw.Draw(image)
+
+    rounded_rect(image, (92, 92, 932, 932), 92, (255, 255, 255, 18), (*accent, 115), 3, (*accent, 58))
+    rounded_rect(image, (132, 132, 892, 892), 72, (7, 10, 29, 210), (255, 255, 255, 30), 2)
+
+    draw_orbit_icon(image, (512, 278), 130, accent, 9)
+    text(d, (512, 445), "ALTER EGO AI", 36, accent, "bold", anchor="ma")
+    wrapped_text(d, (190, 500), title, 76, 650, WHITE, "bold", 8)
+    text(d, (512, 662), tier, 34, WHITE, "bold", anchor="ma")
+    text(d, (512, 714), price, 30, accent, "bold", anchor="ma")
+
+    rounded_rect(image, (222, 768, 802, 832), 32, (*accent, 38), (*accent, 125), 2)
+    text(d, (512, 788), subtitle, 24, WHITE, "bold", anchor="ma")
+
+    rounded_rect(image, (268, 846, 756, 888), 21, (*accent, 24), (*accent, 80))
+    text(d, (512, 856), "PREMIUM DIGITAL ACCESS", 17, MUTED, "bold", anchor="ma")
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    image.convert("RGB").save(path, "PNG", optimize=True)
+
+
+def generate_subscription_promo_images() -> None:
+    products = [
+        (
+            "pro_monthly_image.png",
+            "PRO MONTHLY",
+            "Unlock Pro",
+            "Unlimited future-self momentum",
+            "GBP 9.99 / month",
+            "com.alteregoai.pro.monthly",
+            CYAN,
+        ),
+        (
+            "pro_yearly_image.png",
+            "PRO YEARLY",
+            "A Year of Pro",
+            "The full transformation timeline",
+            "GBP 79.99 / year",
+            "com.alteregoai.pro.yearly",
+            BLUE,
+        ),
+        (
+            "elite_monthly_image.png",
+            "ELITE MONTHLY",
+            "Apex Self Access",
+            "Advanced identities and themes",
+            "GBP 19.99 / month",
+            "com.alteregoai.elite.monthly",
+            GREEN,
+        ),
+    ]
+    for filename, tier, title, subtitle, price, product_id, accent in products:
+        draw_subscription_promo_image(
+            SUBSCRIPTION_IMAGE_ROOT / filename,
+            tier,
+            title,
+            subtitle,
+            price,
+            product_id,
+            accent,
+        )
+
+
 def draw_screenshot(path: Path, size: tuple[int, int], headline: str, subhead: str, phone_title: str, screen_kind: str) -> None:
     w, h = size
     base = gradient(size, [(0, (3, 4, 16)), (0.42, (20, 17, 55)), (1, (2, 17, 34))]).convert("RGBA")
@@ -555,6 +635,7 @@ def main() -> None:
     generate_screenshots()
     generate_app_icons()
     generate_subscription_review_screenshots()
+    generate_subscription_promo_images()
     print(f"Generated assets under {ASSET_ROOT}")
     print(f"Generated Xcode asset catalog under {XCASSETS_ROOT}")
 
