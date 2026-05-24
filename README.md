@@ -25,6 +25,28 @@ Project defaults:
 - Designed-for-iPhone/iPad Mac and Apple Vision compatible destinations enabled in Xcode settings
 - Premium App Store screenshot and app icon asset pack generated locally
 
+## GitHub build and App Store upload
+
+GitHub Actions is configured in `.github/workflows/ios-build.yml`.
+
+What it does:
+
+- Builds the app for iOS Simulator on every push to `main`.
+- Can create a signed App Store archive and upload the IPA to App Store Connect when manually run with `upload_to_app_store` set to `true`.
+
+Required repository secrets for App Store upload:
+
+- `APP_STORE_CONNECT_KEY_ID`
+- `APP_STORE_CONNECT_ISSUER_ID`
+- `APP_STORE_CONNECT_API_KEY_BASE64`
+- `APPLE_TEAM_ID`
+- `IOS_DISTRIBUTION_CERT_BASE64`
+- `IOS_DISTRIBUTION_CERT_PASSWORD`
+- `IOS_PROVISIONING_PROFILE_BASE64`
+- `IOS_PROVISIONING_PROFILE_NAME` is optional. If omitted, the workflow reads the name from the provisioning profile.
+
+The base64 secrets should contain the App Store Connect API `.p8` key, Apple Distribution `.p12` certificate, and App Store `.mobileprovision` profile. The workflow uses build number `GITHUB_RUN_NUMBER` and uploads with App Store Connect API credentials.
+
 ## StoreKit product identifiers
 
 Create matching auto-renewable subscriptions in App Store Connect or in a StoreKit test configuration:
@@ -60,6 +82,8 @@ Generated marketing assets live in `AppStoreAssets/`:
 - `AppStoreAssets/AppIcon/AlterEgoAI-AppIcon-1024.png`
 - `AppStoreAssets/Screenshots/iPhone-6.5/` - 5 screenshots at `1242 x 2688`
 - `AppStoreAssets/Screenshots/iPad-12.9/` - 5 screenshots at `2048 x 2732`
+- `AppStoreAssets/SubscriptionImages/` - 1024 x 1024 subscription promotional images
+- `AppStoreAssets/SubscriptionReview/` - subscription review screenshots
 
 The shipped app icon catalog lives in `AlterEgoAI/Resources/Assets.xcassets/AppIcon.appiconset`. Regenerate all assets with:
 
