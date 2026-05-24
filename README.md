@@ -40,8 +40,12 @@ Required repository secrets for App Store upload:
 - `APP_STORE_CONNECT_ISSUER_ID`
 - `APP_STORE_CONNECT_API_KEY_BASE64`
 - `APPLE_TEAM_ID`
+- `IOS_DISTRIBUTION_CERT_BASE64`
+- `IOS_DISTRIBUTION_CERT_PASSWORD`
+- `IOS_PROVISIONING_PROFILE_BASE64`
+- `IOS_PROVISIONING_PROFILE_NAME`
 
-The App Store Connect API key should have access to manage signing assets. `APP_STORE_CONNECT_API_KEY_BASE64` is the base64-encoded `.p8` key file. The workflow uses Xcode automatic signing, build number `GITHUB_RUN_NUMBER`, and uploads with App Store Connect API credentials.
+The App Store Connect API key should have access to upload builds. `APP_STORE_CONNECT_API_KEY_BASE64` is the base64-encoded `.p8` key file. The iOS distribution certificate and App Store provisioning profile secrets are base64-encoded signing files. The workflow uses manual App Store distribution signing, build number `GITHUB_RUN_NUMBER`, and uploads with App Store Connect API credentials.
 
 ## StoreKit product identifiers
 
