@@ -36,6 +36,7 @@
 		A00000000000000000000227 /* WatchPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000127 /* WatchPlaceholder.swift */; };
 		A00000000000000000000228 /* AlterEgoWidgetPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000128 /* AlterEgoWidgetPlaceholder.swift */; };
 		A00000000000000000000229 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000129 /* PrivacyInfo.xcprivacy */; };
+		A00000000000000000000230 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000131 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		A00000000000000000000128 /* AlterEgoWidgetPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlterEgoWidgetPlaceholder.swift; sourceTree = "<group>"; };
 		A00000000000000000000129 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		A00000000000000000000130 /* AppPrivacyDetails.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = AppPrivacyDetails.md; sourceTree = "<group>"; };
+		A00000000000000000000131 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				A00000000000000000000130 /* AppPrivacyDetails.md */,
+				A00000000000000000000131 /* Assets.xcassets */,
 				A00000000000000000000129 /* PrivacyInfo.xcprivacy */,
 			);
 			path = Resources;
@@ -275,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A00000000000000000000229 /* PrivacyInfo.xcprivacy in Resources */,
+				A00000000000000000000230 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +442,8 @@
 		A00000000000000000000032 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -460,6 +466,8 @@
 		A00000000000000000000033 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;

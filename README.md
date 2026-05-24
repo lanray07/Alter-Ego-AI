@@ -23,6 +23,7 @@ Project defaults:
 - WidgetKit placeholder code
 - Apple Watch placeholder view
 - Designed-for-iPhone/iPad Mac and Apple Vision compatible destinations enabled in Xcode settings
+- Premium App Store screenshot and app icon asset pack generated locally
 
 ## StoreKit product identifiers
 
@@ -51,3 +52,17 @@ See `AlterEgoAI/Resources/AppPrivacyDetails.md` for App Privacy preparation note
 ## Platform launch plan
 
 Start with the iOS App Store record for iPhone and iPad. Keep iPhone/iPad availability enabled for Apple silicon Macs and Apple Vision Pro to maximize compatible-app reach without separate native macOS or visionOS binaries. Add native macOS or visionOS platform versions later when separate platform targets, screenshots, QA, and metadata are ready.
+
+## App Store assets
+
+Generated marketing assets live in `AppStoreAssets/`:
+
+- `AppStoreAssets/AppIcon/AlterEgoAI-AppIcon-1024.png`
+- `AppStoreAssets/Screenshots/iPhone-6.5/` - 5 screenshots at `1242 x 2688`
+- `AppStoreAssets/Screenshots/iPad-12.9/` - 5 screenshots at `2048 x 2732`
+
+The shipped app icon catalog lives in `AlterEgoAI/Resources/Assets.xcassets/AppIcon.appiconset`. Regenerate all assets with:
+
+```bash
+python Tools/generate_app_store_assets.py
+```
