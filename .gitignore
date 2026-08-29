@@ -18,6 +18,17 @@ xcuserdata/
 *.xcconfig.local
 .env
 .env.*
+!.env.example
+!android/.env.example
+
+# Android build and signing artifacts
+android/.gradle/
+android/local.properties
+android/**/build/
+android/*.jks
+android/*.keystore
+*.jks
+*.keystore
 
 # StoreKit local testing artifacts
 *.storekit.local

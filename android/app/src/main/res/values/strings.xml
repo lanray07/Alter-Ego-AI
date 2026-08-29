@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Alter Ego AI</string>
+    <string name="share_provider_authority">com.alteregoai.app.fileprovider</string>
+</resources>

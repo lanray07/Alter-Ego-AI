@@ -2,6 +2,8 @@
 
 Alter Ego AI is a SwiftUI iOS app for general wellness, habit-building, motivation, identity-based goals, daily missions, journaling, progress insights, streaks, XP, and future-self coaching.
 
+The native Android implementation lives in [`android/`](android/README.md) and is maintained alongside the iOS project. Start with [`PORTING_NOTES.md`](PORTING_NOTES.md), [`SETUP_REQUIRED.md`](SETUP_REQUIRED.md), and [`QA_CHECKLIST.md`](QA_CHECKLIST.md) for Android readiness and release work.
+
 Core positioning: "Become the person you were supposed to be."
 
 Viral hook: "Your future self is watching."
