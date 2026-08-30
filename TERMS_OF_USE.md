@@ -2,7 +2,7 @@
 
 Effective date: May 24, 2026
 
-By using Alter Ego AI, you agree to these terms and Apple's Standard End User License Agreement for apps distributed through the App Store.
+By using Alter Ego AI, you agree to these terms and the applicable app store terms for the platform where you installed the app.
 
 ## Purpose
 
@@ -16,7 +16,7 @@ AI coaching is informational and motivational only. It may be incomplete, inaccu
 
 ## Subscriptions
 
-Premium digital features may be offered through auto-renewable subscriptions using Apple's StoreKit and In-App Purchase systems. Subscription pricing, renewal, cancellation, and refund handling are managed by Apple according to your App Store account settings and Apple's terms.
+Premium digital features may be offered through auto-renewable subscriptions using the platform store where you installed the app. On iOS, purchases are handled by Apple StoreKit and In-App Purchase. On Android, purchases are handled by Google Play Billing. Subscription pricing, renewal, cancellation, and refund handling are managed by the applicable platform store according to your account settings and that store's terms.
 
 ## User Content
 
@@ -28,4 +28,4 @@ Alter Ego AI can support motivation and habit tracking, but it does not guarante
 
 ## Contact
 
-For support or terms questions, contact: lanraybanks@gmail.com
+For support or terms questions, contact: lanre07ai@gmail.com

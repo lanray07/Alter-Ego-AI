@@ -8,17 +8,17 @@ Alter Ego AI is a general wellness, habit-building, motivation, journaling, and 
 
 The current app build does not collect personal data from the app for the developer.
 
-Your profile, identity goals, missions, journal entries, chat messages, achievements, subscription cache, and transformation timeline are stored locally on your device using Apple platform storage. Mock AI coaching is enabled by default and runs from bundled app logic.
+Your profile, identity goals, missions, journal entries, chat messages, achievements, subscription cache, and transformation timeline are stored locally on your device using platform storage. On Android, this includes the app's local Room database and DataStore preferences. Mock AI coaching is enabled by default and runs from bundled app logic.
 
 ## Data Sharing
 
 Alter Ego AI does not sell your data and does not share your local app data with third-party advertisers.
 
-Share cards are shared only when you choose to open and confirm the native iOS share sheet.
+Share cards and export summaries are shared only when you choose to open and confirm the native system share sheet.
 
 ## Subscriptions
 
-Purchases and subscriptions are processed by Apple through StoreKit and In-App Purchase. Apple may process purchase-related information according to Apple's privacy policies and App Store terms.
+Purchases and subscriptions are processed by the platform store where you install the app. On iOS, Apple processes purchases through StoreKit and In-App Purchase. On Android, Google Play processes purchases through Google Play Billing. The platform store may process purchase-related information according to its own privacy policies and store terms.
 
 ## AI Coaching
 
@@ -28,7 +28,7 @@ If a future version enables remote AI features, the app's privacy disclosures an
 
 ## Notifications
 
-If you enable notifications, Alter Ego AI may schedule local reminders on your device. Notification preferences can be changed in iOS Settings.
+If you enable notifications, Alter Ego AI may schedule local reminders on your device. Notification preferences can be changed in your device settings.
 
 ## Data Export and Deletion
 
@@ -36,4 +36,4 @@ The app includes settings for data export and deleting local app data. You can a
 
 ## Contact
 
-For privacy questions, contact: lanraybanks@gmail.com
+For privacy questions, contact: lanre07ai@gmail.com
